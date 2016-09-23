@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <title>Course list</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<style type="text/css">
+        
+        .container {
+        width: 600px;
+        margin: 0 auto;
+        box-sizing: border-box;
+        border: 5px solid black;
+        padding: 30px 50px 50px 50px;
+        margin-top: 50px;
+    }
+
+    .valid {
+        background: green;
+        padding: 30px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .error {
+        font-size: 14px;
+        color: red;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    .remove {
+        text-align: right;
+    }
+
+    input {
+        margin-bottom: 20px;
+    }
+
+</style>
+
+<body>
+    <div class='container'>
+        <h1>Add New Course</h1>
+
+        <form action='/courses' method='POST'>
+            <label for='name'> Name <input type='text', name='name'/></label>
+                <div class="error"> 
+                </div>
+            <label for='description'>Description <input type='text', name='description'/></label><br/>
+            <input type='submit' name='Submit' methods = 'post'/>
+             
+        </form>
+    </div>
+       
+        <div class='container'>
+            <h3>Current course list</h3>
+            <table>
+                <thead>
+                
+                    <tr>
+                        <th> Name </th>
+                        <th> Description </th>
+                        <th> Updated_at </th>
+                        <th> Action </th>
+
+
+                    </tr>
+                   
+               </thead>
+                     <tbody> 
+                            {% for course in courses %}
+
+                        <tr>    
+                                <td> {{course.name}}</td>
+                                <td> {{course.description}}</td>
+                                <td> {{course.updated_at}}  </td>
+
+                                <td> <a href="/courses/delete/{{course.id}}"> Delete </a> </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            
+            </table>
+                  
+        
+            
+        </div>
+</body>
+</html>
+
